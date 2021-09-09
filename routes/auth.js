@@ -39,12 +39,12 @@ router.post('/login', async function (req, res){
     port: process.env.PGPORT 
   });
   
-      let usersResult = await pool.query('SELECT mail, password FROM usuarios WHERE mail = $1', [req.body.mail]);
+    const usersResult = await pool.query('SELECT mail, password FROM usuarios WHERE mail = $1', [req.body.mail]);
       
-  // if(userResult.rowcount === 0) 
-  // {
-  //     return res.status(400).json({error: 'Usuario no encontrado'});
-  // }
+  if(usersResult.rowCount === 0) 
+  {
+      return res.status(400).json({error: 'Usuario no encontrado'});
+  }
   const user = usersResult.rows[0];
   console.log('user', user);
 
