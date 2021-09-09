@@ -3,9 +3,9 @@
 -- CREATE DATABASE telsitur
 CREATE TABLE usuarios (
   id_usuario SERIAL NOT NULL PRIMARY KEY,
-  mail VARCHAR(100) NOT NULL UNIQUE,
-  nombre VARCHAR(50) NOT NULL,
-  password VARCHAR(50) NOT NULL,
+  mail VARCHAR(200) NOT NULL UNIQUE,
+  nombre VARCHAR(200) NOT NULL,
+  password VARCHAR(200) NOT NULL,
   estado BOOLEAN NOT NULL DEFAULT 'true'
 );
 CREATE TABLE categorias (
@@ -16,12 +16,12 @@ CREATE TABLE categorias (
 CREATE TABLE proveedores (
   id_proveedor SERIAL NOT NULL UNIQUE PRIMARY KEY,
   nombre VARCHAR(200) NOT NULL,
-  contacto VARCHAR(45) NOT NULL,
+  contacto VARCHAR(200) NOT NULL,
   estado BOOLEAN NOT NULL DEFAULT 'true'
 );
 CREATE TABLE articulos (
   id_articulo SERIAL NOT NULL UNIQUE PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
+  nombre VARCHAR(200) NOT NULL,
   descripcion VARCHAR(200) NOT NULL,
   categoria VARCHAR(200) NOT NULL,
   imagen VARCHAR(200) NOT NULL,

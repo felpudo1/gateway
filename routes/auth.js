@@ -13,23 +13,19 @@ const {Pool} = require ('pg');
 // const JSONTransport = require('nodemailer/lib/json-transport');
 
 //EMPIEZAN LOS MANEJADORES de ESTE ROUTER router.verbo/login o /auth
-
-
-
 //POST LOGIN
 
-
 router.post('/login', async function (req, res){
-  // if (( req.body.mail===""))
-  // {
-  //     res.status(400).json({ success: false, message: "falta ingresar mail"})
-  //     return;
-  // }
-  // else if (( req.body.password===""))
-  // {
-  //     res.status(400).json({ success: false, message: "falta ingresar password"})
-  // return;
-  // } //verificamos que el cuerpo del mail y pass no sea vacios
+  if (( req.body.mail===""))
+  {
+      res.status(400).json({ success: false, message: "falta ingresar mail"})
+      return; //verificamos que el cuerpo del mail y pass no sea vacios
+  }
+  else if (( req.body.password===""))
+  {
+      res.status(400).json({ success: false, message: "falta ingresar password"})
+  return; //verificamos que el cuerpo del mail y pass no sea vacios
+  } 
   
   const pool = new Pool({
     user: process.env.PGUSER,
@@ -37,21 +33,25 @@ router.post('/login', async function (req, res){
     password: process.env.PASSWORD,
     database: process.env.PGDATABASE,
     port: process.env.PGPORT 
-  });
-  
-    const usersResult = await pool.query('SELECT mail, password FROM usuarios WHERE mail = $1', [req.body.mail]);
-      
+  });  
+
+  try {
+    const usersResult = await pool.query('SELECT mail, password FROM usuarios WHERE mail = $1', [req.body.mail]);   
   if(usersResult.rowCount === 0) 
   {
       return res.status(400).json({error: 'Usuario no encontrado'});
   }
-  const user = usersResult.rows[0];
-  console.log('user', user);
 
-  try {
-  const validPassword = await bcrypt.compare(req.body.password, user.password);  //metodo compare la encrip del body con el del user.passw del find de arriba
+const user = usersResult.rows[0];
+// console.log('User', user);
+
+const validPassword = await bcrypt.compare(req.body.password, user.password);
+
+
 if (!validPassword) {
-  return res.status(400).json({ error: 'Contraseña incorrecta' });
+  console.log ("el pass de req.body.password es  =   " +req.body.password)
+  console.log ("el pass   de  user.password es   =   " +user.password)
+  return res.status(400).json({ error: 'Contraseña no válida' });
 }
 
  // Crear el token  //aca cremos el token despues de saber q pass es valido
