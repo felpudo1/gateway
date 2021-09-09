@@ -59,7 +59,10 @@ if (!validPassword) {
 res.json({ error: null, data: `BIENVENIDO ${user.mail} Login exitoso `, token });
 }
 catch(err) {
-  return res.status(400).json({ error: err.message });
+  
+  return res.status(400).json({ error: "falta ingresar password  " + err.message });
+
+  
 }
 //aca devolvemos mensaje exitoso y el token 
 });   //fin login
@@ -147,9 +150,9 @@ catch (ex){
   return response.send ({
     success:false,
     error: 'an exception was throw:' + (ex)        
-    });
-    
+    });    
   }
+  
 }); //FIN agregar un articulo///////////////////////////////////
  ////////////////////////////////////////////////////////////// 
 
