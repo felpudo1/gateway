@@ -7,8 +7,8 @@ const { verifyToken} = require('../middlewares/jwt-validate')
 const express = require('express');  
 const bcrypt = require('bcrypt');
 const router = express.Router();
-const {Pool} = require ('pg');
-// const db = require('../db');
+const db = require('../db'); //creao el pool en carp db y traigo la cte.
+
 
 // const JSONTransport = require('nodemailer/lib/json-transport');
 
@@ -25,18 +25,10 @@ router.post('/login', async function (req, res){
   {
       res.status(400).json({ success: false, message: "falta ingresar password"})
   return; //verificamos que el cuerpo del mail y pass no sea vacios
-  } 
-  
-  const pool = new Pool({
-    user: process.env.PGUSER,
-    host: process.env.PGHOST,
-    password: process.env.PASSWORD,
-    database: process.env.PGDATABASE,
-    port: process.env.PGPORT 
-  });  
-
+  }   
+ 
   try {
-    const usersResult = await pool.query('SELECT mail, password FROM usuarios WHERE mail = $1', [req.body.mail]);   
+    let usersResult = await db.query('SELECT mail, password FROM usuarios WHERE mail = $1', [req.body.mail]);   
   if(usersResult.rowCount === 0) 
   {
       return res.status(400).json({error: 'Usuario no encontrado'});
@@ -98,10 +90,6 @@ catch(err) {
 
 
 
-
-
-
-
 //creamos un router q no hace nada para saber q esta conectado////
 router.get('/', (req, res) =>{  
   res.json(
@@ -135,16 +123,9 @@ const estado = request.body.estado;
 const id_proveedorEnArticulos = request.body.id_proveedorEnArticulos;
 const id_categoriaEnArticulos = request.body. id_categoriaEnArticulos;
 
-const pool = new Pool({
-  user: process.env.PGUSER,
-  host: process.env.PGHOST,
-  password: process.env.PASSWORD,
-  database: process.env.PGDATABASE,
-  port: process.env.PGPORT 
-});
 
 //desde node usamos met query del pool para todos los verbos
-const res = await pool.query ('iNSERT INTO articulos(nombre, descripcion, categoria, imagen, precio, stock, estado, id_proveedorEnArticulos, id_categoriaEnArticulos) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [nombre, descripcion, categoria, imagen, precio, stock, estado, id_proveedorEnArticulos, id_categoriaEnArticulos]);
+const res = await db.query ('iNSERT INTO articulos(nombre, descripcion, categoria, imagen, precio, stock, estado, id_proveedorEnArticulos, id_categoriaEnArticulos) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [nombre, descripcion, categoria, imagen, precio, stock, estado, id_proveedorEnArticulos, id_categoriaEnArticulos]);
 
 response.send ({
   success: true, 
