@@ -8,6 +8,8 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const {Pool} = require ('pg');
+// const db = require('../db');
+
 // const JSONTransport = require('nodemailer/lib/json-transport');
 
 //EMPIEZAN LOS MANEJADORES de ESTE ROUTER router.verbo/login o /auth
@@ -16,23 +18,35 @@ const {Pool} = require ('pg');
 
 //POST LOGIN
 
-router.post('/login', async function (req, res){
-  if (( req.body.mail===""))
-  {
-      res.status(400).json({ success: false, message: "falta ingresar mail"})
-      return;
-  }
-  else if (( req.body.password===""))
-  {
-      res.status(400).json({ success: false, message: "falta ingresar password"})
-  return;
-  } //verificamos que el cuerpo del mail y pass no sea vacios
 
-  const user = usuarios.find((user) =>user.mail===req.body.mail);
-  if(!user) 
-  {
-      return res.status(400).json({error: 'Usuario no encontrado'});
-  }
+router.post('/login', async function (req, res){
+  // if (( req.body.mail===""))
+  // {
+  //     res.status(400).json({ success: false, message: "falta ingresar mail"})
+  //     return;
+  // }
+  // else if (( req.body.password===""))
+  // {
+  //     res.status(400).json({ success: false, message: "falta ingresar password"})
+  // return;
+  // } //verificamos que el cuerpo del mail y pass no sea vacios
+  
+  const pool = new Pool({
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    password: process.env.PASSWORD,
+    database: process.env.PGDATABASE,
+    port: process.env.PGPORT 
+  });
+  
+      let usersResult = await pool.query('SELECT mail, password FROM usuarios WHERE mail = $1', [req.body.mail]);
+      
+  // if(userResult.rowcount === 0) 
+  // {
+  //     return res.status(400).json({error: 'Usuario no encontrado'});
+  // }
+  const user = usersResult.rows[0];
+  console.log('user', user);
 
   try {
   const validPassword = await bcrypt.compare(req.body.password, user.password);  //metodo compare la encrip del body con el del user.passw del find de arriba
@@ -96,9 +110,6 @@ router.get('/', (req, res) =>{
     );
   }); //FIN GET  
   //////////////////////////////////////////////////////////////
-
-
-
 
 
 //agregar un articulo//////////////////////////////////////////
