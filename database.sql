@@ -1,7 +1,7 @@
 --correr en la 1era etapa
 -- drop DATABASE telsitur;
 -- CREATE DATABASE telsitur
-CREATE TABLE empleados (
+CREATE TABLE usuarios (
   id_usuario SERIAL NOT NULL PRIMARY KEY,
   mail VARCHAR(100) NOT NULL UNIQUE,
   nombre VARCHAR(50) NOT NULL,
@@ -37,12 +37,12 @@ CREATE TABLE articulos (
 --scrpit ingreso de datos
 --inserts empleado
 INSERT INTO
-  empleados (mail, nombre, password)
+  usuarios (mail, nombre, password)
 VALUES
   ('juan.sequeira@gmail.com', 'juan', '1234');
 INSERT INTO
-  empleados (mail, nombre, password)
-VALUES
+  usuarios
+vALUES
   ('1@1.com', 'pablo', '1234');
 --inserts prov
 INSERT INTO
