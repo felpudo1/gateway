@@ -3,7 +3,7 @@
 
 const jwt = require('jsonwebtoken')
 
-const TOKEN_SECRET = 'SecretCode';
+const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
 // middleware to validate token (rutas protegidas)  
 //en este middle la fx recibe 3 param. req para tener acc. //res para respo y next a seguir 
@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {  //aca creamos una fx recibe req res y
   }
 
   try {      //si llega el token lo verificamos
-    const verified = jwt.verify(token, TOKEN_SECRET)    //aca le pasamos el token q trajimos y la clave secreta
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET)    //aca le pasamos el token q trajimos y la clave secreta
     req.user = verified  //parsea el token  //en el verify se guarda el payload(q son los datos q pasamos user//mail//si es admmin, etc) 
     //al paremetro req le agregamos info
     next(); // continuamos hacia el manejador de la ruta
@@ -27,5 +27,5 @@ const verifyToken = (req, res, next) => {  //aca creamos una fx recibe req res y
 
 module.exports = {
   verifyToken,    //exporta la fx verifytoken  
-  TOKEN_SECRET     //y la clave secreta para usar en la genracion y verific
+      
 };

@@ -1,6 +1,6 @@
 //AUTH DE PROYECTOBACK
 const jwt = require('jsonwebtoken'); //instalamos para token                                  
-const {TOKEN_SECRET, verifyToken} = require('../middlewares/jwt-validate')
+const { verifyToken} = require('../middlewares/jwt-validate')
 //reqeremimos el TOKKEN_SECRET para traerlo del archivo del middleware 
 //traemos el valor del TOKKEN_SECRET
 //tbm traemos en la fx verifytoken
@@ -44,7 +44,9 @@ if (!validPassword) {
  const token = jwt.sign({
   name: user.name,  
   mail: user.mail
-}, TOKEN_SECRET);  //esta es la variable TOKEN_SECRET q creamos arriba
+},process.env.TOKEN_SECRET);
+
+  //esta es la variable TOKEN_SECRET q creamos arriba
     //esta variable token creada la pasamos como para el front
     // Crear el token
 
