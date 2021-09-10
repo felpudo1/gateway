@@ -3,7 +3,9 @@
     const path = require('path');
     const cors = require('cors'); 
     const bodyParser = require('body-parser'); 
-    const authRouter = require('./routes/auth'); 
+    const authRouter = require('./routes/auth');
+    const artRouter = require('./routes/art');
+
     const nodemailer = require ('nodemailer');
     require ('dotenv').config();
 
@@ -36,6 +38,7 @@
     // Solo en desarrollo
     app.use(cors());    
     app.use('/auth', authRouter); 
+    app.use('/art', artRouter);     
 
    ////////////////////////////////////////////////////////
    ////////////////////////////////////////////////////////     
