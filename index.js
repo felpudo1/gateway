@@ -70,7 +70,10 @@
 
     });
 
-
+    app.get('/*', (req, res) =>{  
+        return res.send("sla pagina solicitada no existe index") 
+        }); //FIN GET  
+        //////////////////////////////////////////////////////////////
 
     //escucha puerto
     app.listen(PORT, function () {

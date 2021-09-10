@@ -84,11 +84,11 @@ router.post('/agregararticulo', async (request, response) =>{
     });//fin actiazar articulos/////////////////////////////
     //////////////////////////////////////////////////////////////
     
-    //creamos un router q no hace nada para saber q esta conectado////
-router.get('/*', (req, res) =>{  
-  return res.send("server corriendo en /art") 
-  }); //FIN GET  
-  //////////////////////////////////////////////////////////////
+//     //creamos un router q no hace nada para saber q esta conectado////
+// router.get('/*', (req, res) =>{  
+//   return res.send("la pagina solicitada no existe /art") 
+//   }); //FIN GET  
+//   //////////////////////////////////////////////////////////////
 
 
     

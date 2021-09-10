@@ -231,7 +231,7 @@ router.get('/listaUserConLogin', verifyToken, (req, res) =>{
 
 
 router.get('/*', (req, res) =>{  
-  return res.send("server corriendo en /auth") 
+  return res.send("sla pagina solicitada no existe /auth") 
   }); //FIN GET  
   //////////////////////////////////////////////////////////////
 
