@@ -93,14 +93,6 @@ catch(err) {
 
 
 
-//creamos un router q no hace nada para saber q esta conectado////
-router.get('/', (req, res) =>{  
-  res.json(
-    {articulos:articulos, 
-      success: true}
-    );
-  }); //FIN GET  
-  //////////////////////////////////////////////////////////////
 
 
 //agregar un articulo//////////////////////////////////////////
@@ -181,11 +173,19 @@ router.put('/:articuloId', (request, response) =>{
 
 
 
+//creamos un router q no hace nada para saber q esta conectado////
+router.get('/', (req, res) =>{  
+  res.json(
+    {articulos:articulos, 
+      success: true}
+    );
+  }); //FIN GET  
+  //////////////////////////////////////////////////////////////
 
 
 
 
-//POST REGISTRO
+//POST REGISTRO memoria
 router.post ('/register', async function  (req, res) { //hacemos la func asy
     //xq usamos abajo bcyrpt que es una fx q devuelve una promesa
   
@@ -309,12 +309,12 @@ router.get('/listaUserConLogin', verifyToken, (req, res) =>{
 ////////////////////////////////////////////////////////////// 
 
 
-//new3 aca va a devolver los articulos
-router.get('/articulos', function(req, res){
-  res.json({
-    articulos:articulos
-  });
-});
+// //new3 aca va a devolver los articulos en memoria
+// router.get('/articulos', function(req, res){
+//   res.json({
+//     articulos:articulos
+//   });
+// });
 
 //declaramos arrays
 const usuarios = [
@@ -340,16 +340,8 @@ const articulos = [
     imagen: "xxx",
     precio: "1200",
     estado: "ingresado"
-    },                            
-    {
-        id: "003",
-    nombre: "calculadora",
-    descripcion: "calc mesa",
-    categoria: "oficina",
-    imagen: "xxx",
-    precio: "1200",
-    estado: "ingresado"
-    }
+    }                           
+   
 ];//array de articulos 
 
 
