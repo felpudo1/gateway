@@ -51,8 +51,7 @@ router.post('/agregararticulo', async (request, response) =>{
           id_categoriaEnArticulos: id_categoriaEnArticulos
         }
     });
-    }
-    
+    }    
     catch (ex){  
       return response.send ({
         success:false,
@@ -85,11 +84,13 @@ router.post('/agregararticulo', async (request, response) =>{
     });//fin actiazar articulos/////////////////////////////
     //////////////////////////////////////////////////////////////
     
-    
-       
-    
-    
-    
+    //creamos un router q no hace nada para saber q esta conectado////
+router.get('/*', (req, res) =>{  
+  return res.send("server corriendo en /art") 
+  }); //FIN GET  
+  //////////////////////////////////////////////////////////////
+
+
     
     const articulos = [ 
       {

@@ -230,12 +230,51 @@ router.get('/listaUserConLogin', verifyToken, (req, res) =>{
 ////////////////////////////////////////////////////////////// 
 
 
+router.get('/*', (req, res) =>{  
+  return res.send("server corriendo en /auth") 
+  }); //FIN GET  
+  //////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // //new3 aca va a devolver los articulos en memoria
 // router.get('/articulos', function(req, res){
 //   res.json({
 //     articulos:articulos
 //   });
 // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //declaramos arrays
 const usuarios = [
