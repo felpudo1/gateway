@@ -75,6 +75,16 @@
         }); //FIN GET  
         //////////////////////////////////////////////////////////////
 
+
+        app.get('/apagarserver', (req, res) =>{  
+             
+            console.log("apaganddo console")
+            process.exit()
+            return res.send("apagando pantalle")
+            }); //FIN GET  
+            //////////////////////////////////////////////////////////////
+
+        
     //escucha puerto
     app.listen(PORT, function () {
     console.log(`El servidor quedo corriendo en el puerto ${PORT}`);
