@@ -89,6 +89,12 @@
 
         
     //escucha puerto
-    app.listen(PORT, function () {
-    console.log(`El servidor quedo corriendo en el puerto ${PORT}`);
+    app.listen(PORT, (err) => {
+        if(err)
+            {
+                console.log(`ERROR ${err}`)            
+            }
+        else{  
+                console.log(`El servidor quedo corriendo en el puerto ${PORT}`);
+            }
  });
