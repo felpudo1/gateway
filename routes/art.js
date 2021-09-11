@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest:'uploads/' })
+const cors require('cors');
 
 // const userRoutes = require('../');
 
