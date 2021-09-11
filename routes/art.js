@@ -5,28 +5,35 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest:'uploads/' })
-const cors require('cors');
+const cors= require('cors');
 
 // const userRoutes = require('../');
 
-router.use (bodyParser.urlencoded({ extended: false}))
-router.use (bodyParser.json())
+// router.use (bodyParser.urlencoded({ extended: false})) //vwe si no es true
+// router.use (bodyParser.json())
+
+router.use (express.urlencoded({ extended: false})) //vwe si no es true
+router.use (express.json())
+
+router.use (express.static(path.join(__dirname, '/app/upload')));
+
 
 //creamos un router q no hace nada para saber q esta conectado////
 router.get('/', (req, res) =>{  
-    return res.send("toy en /articlos") 
+    return res.send("toy en /art") 
     }); //FIN GET  
     //////////////////////////////////////////////////////////////
 
    
     
 //agregar un articulo//////////////////////////////////////////
+
+
 router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (request, response) =>{
-  
-    //lo primero que hacemos es valdar los datos
-    // si se tienen muchos textbox hacer un if x c/u
+  try {          
     
-    try {
+                    //lo primero que hacemos es valdar los datos
+                    // si se tienen muchos textbox hacer un if x c/u    
     if (request.body.nombre === null || request.body.nombre === undefined) {
       return response.send ({
         success: false, 
@@ -36,7 +43,7 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
     const nombre =request.body.nombre;
     const descripcion = request.body.descripcion;
     const categoria = request.body.categoria;
-    const imagen = request.body.imagen;
+    const imagen = request.file.filename;
     const precio = request.body.precio;
     const stock = request.body.stock;
     const estado = request.body.estado;
@@ -44,8 +51,10 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
     const id_categoriaEnArticulos = request.body. id_categoriaEnArticulos;
     
     
+    
     //desde node usamos met query del pool para todos los verbos
     const res = await db.query ('iNSERT INTO articulos(nombre, descripcion, categoria, imagen, precio, stock, estado, id_proveedorEnArticulos, id_categoriaEnArticulos) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [nombre, descripcion, categoria, imagen, precio, stock, estado, id_proveedorEnArticulos, id_categoriaEnArticulos]);
+    console.log (request.file)
     
     response.send ({
       success: true, 
@@ -59,8 +68,11 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
           estado:estado,
           id_proveedorEnArticulos: id_proveedorEnArticulos,
           id_categoriaEnArticulos: id_categoriaEnArticulos
-        }        
+        }
+                
     });
+    debugger
+    
     }    
     catch (ex){  
       return response.send ({
