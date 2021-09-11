@@ -1,7 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); //creao el pool en carp db y traigo la cte.
+const path = require('path');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const uploadMiddleware = multer({ dest:'uploads/' })
 
+// const userRoutes = require('../');
+
+router.use (bodyParser.urlencoded({ extended: false}))
+router.use (bodyParser.json())
 
 //creamos un router q no hace nada para saber q esta conectado////
 router.get('/', (req, res) =>{  
@@ -12,7 +20,8 @@ router.get('/', (req, res) =>{
    
     
 //agregar un articulo//////////////////////////////////////////
-router.post('/agregararticulo', async (request, response) =>{
+router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (request, response) =>{
+  
     //lo primero que hacemos es valdar los datos
     // si se tienen muchos textbox hacer un if x c/u
     
@@ -49,7 +58,7 @@ router.post('/agregararticulo', async (request, response) =>{
           estado:estado,
           id_proveedorEnArticulos: id_proveedorEnArticulos,
           id_categoriaEnArticulos: id_categoriaEnArticulos
-        }
+        }        
     });
     }    
     catch (ex){  

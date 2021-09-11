@@ -70,19 +70,22 @@
 
     });
 
+    //apagado remoto
+    app.get('/apagarserver', (req, res) =>{  
+             
+        console.log("apaganddo console")
+        process.exit()
+        return res.send("apagando pantalle")
+        }); //FIN GET  
+        //////////////////////////////////////////////////////////////
+
     app.get('/*', (req, res) =>{  
         return res.send("sla pagina solicitada no existe index") 
         }); //FIN GET  
         //////////////////////////////////////////////////////////////
 
 
-        app.get('/apagarserver', (req, res) =>{  
-             
-            console.log("apaganddo console")
-            process.exit()
-            return res.send("apagando pantalle")
-            }); //FIN GET  
-            //////////////////////////////////////////////////////////////
+        
 
         
     //escucha puerto
