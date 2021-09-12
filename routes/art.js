@@ -22,9 +22,7 @@ router.use (express.static(path.join(__dirname, '/app/upload')));
 
 
 router.get('/pug',(req,res) =>{
-  res.render('index', {})
-
-
+  res.render('index', {titulo: 'listado de articulos'})
 });
 
 //creamos un router q no hace nada para saber q esta conectado////
@@ -36,8 +34,6 @@ router.get('/', (req, res) =>{
    
     
 //agregar un articulo//////////////////////////////////////////
-
-
 router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (request, response) =>{
   try {          
     
