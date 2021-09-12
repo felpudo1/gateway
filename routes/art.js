@@ -25,6 +25,7 @@ router.get('/pug',(req,res) =>{
   res.render('index', {titulo: 'listado de articulos'})
 });
 
+
 //creamos un router q no hace nada para saber q esta conectado////
 router.get('/', (req, res) =>{  
     return res.send("toy en /art") 
