@@ -111,19 +111,21 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
 
 
      // listar un articulos PUB/////////////////////////////////////////
-     router.get('/ListarARticulos', async(request, response) =>{
+     router.get('/ListarARticulospug', async(request, response) =>{
       try{
         const articulosDB = await db.query ('select nombre from articulos');
         const articulos = articulosDB.rows               
+              
+              response.render('index', {articulos}) 
               console.log (articulos)
-              // res.render('index', {articulos: articulos})  //res.render('index',{nombres}); o {'nombres':nombres}
+              //res.render('index',{nombres}); o {'nombres':nombres}
               return response.send ({
-                success: true,
-                articulos                
+                success: true,                                
               })
             }
       
       catch (ex){
+        console.log (ex)
       return response.send ({
         success: false,
         error:'exception: ' + JSON.stringify(ex)
