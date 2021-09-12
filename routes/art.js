@@ -6,18 +6,26 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest:'uploads/' })
 const cors= require('cors');
-const { json } = require('body-parser');
-
+// const { json } = require('body-parser');
 // const userRoutes = require('../');
-
 // router.use (bodyParser.urlencoded({ extended: false})) //vwe si no es true
 // router.use (bodyParser.json())
 
+
+
+
 router.use (express.urlencoded({ extended: false})) //vwe si no es true
 router.use (express.json())
-
 router.use (express.static(path.join(__dirname, '/app/upload')));
 
+
+
+
+router.get('/pug',(req,res) =>{
+  res.render('index', {})
+
+
+});
 
 //creamos un router q no hace nada para saber q esta conectado////
 router.get('/', (req, res) =>{  
