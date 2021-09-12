@@ -74,38 +74,6 @@ catch(err) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //POST REGISTRO memoria
 router.post ('/register', async function  (req, res) { //hacemos la func asy
     //xq usamos abajo bcyrpt que es una fx q devuelve una promesa

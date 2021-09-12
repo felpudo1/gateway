@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest:'uploads/' })
 const cors= require('cors');
+const { json } = require('body-parser');
 
 // const userRoutes = require('../');
 
@@ -51,7 +52,6 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
     const id_categoriaEnArticulos = request.body. id_categoriaEnArticulos;
     
     
-    
     //desde node usamos met query del pool para todos los verbos
     const res = await db.query ('iNSERT INTO articulos(nombre, descripcion, categoria, imagen, precio, stock, estado, id_proveedorEnArticulos, id_categoriaEnArticulos) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [nombre, descripcion, categoria, imagen, precio, stock, estado, id_proveedorEnArticulos, id_categoriaEnArticulos]);
     console.log (request.file)
@@ -84,6 +84,27 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
     }); //FIN agregar un articulo///////////////////////////////////
      ////////////////////////////////////////////////////////////// 
     
+     // listar un articulos/////////////////////////////////////////
+    router.get('/ListarARticulos', async(request, response) =>{
+      try{
+        const listadoArticulos = await db.query ('select nombre from articulos');
+        return response.send ({
+          listadoArticulos: [],
+          success:true,
+        });    
+
+      } 
+      catch (ex){
+      return response.send ({
+        success: false,
+        error:'exception: ' + JSON.stringify(ex)
+      })
+    }  
+    
+    }); //fin borrar un articulos///////////////////////////////////
+     //////////////////////////////////////////////////////////////
+
+
     
     //borrar un articulos/////////////////////////////////////////
     router.delete('/:articuloId', (request, response) =>{

@@ -13,17 +13,6 @@
 
 
 
-
-    var transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        post: 587,
-        secure: false, 
-        auth:
-        {
-            user: 'yasmeen.paucek58@ethereal.email',
-            pass: 'BBypXcHJBx7dzV68Pj'
-        }
-    });
        
 
 
@@ -49,33 +38,15 @@
     return res.send("pong")  
     }) 
     
-    app.post('/contacto', function(req, res){
-        console.log("prueba de contacto", req.body.mensaje)
-    var mailOptions={
-     from: "juan.sequeira@gmail.com",
-     to: "juan.sequeira@gmail.com",
-     subject: req.body.mensaje,
-     text:req.body.mensaje
-    };
-    transporter.sendMail(mailOptions, function(error, info){
-    if (error){
-        console.log(error);
-        res.send(error)
-    }
-    else {
-        console.log('Email sent' + info.response)
-        res.send("envio exitoso")
-        }        
-    })
-
-    });
+   
 
     //apagado remoto
     app.get('/apagarserver', (req, res) =>{  
              
         console.log("apaganddo console")
+        res.send("apagando pantalle")
         process.exit()
-        return res.send("apagando pantalle")
+        
         }); //FIN GET  
         //////////////////////////////////////////////////////////////
 
@@ -98,3 +69,40 @@
                 console.log(`El servidor quedo corriendo en el puerto ${PORT}`);
             }
  });
+
+
+
+
+ 
+ app.post('/contacto', function(req, res){
+    console.log("prueba de contacto", req.body.mensaje)
+var mailOptions={
+ from: "juan.sequeira@gmail.com",
+ to: "juan.sequeira@gmail.com",
+ subject: req.body.mensaje,
+ text:req.body.mensaje
+};
+transporter.sendMail(mailOptions, function(error, info){
+if (error){
+    console.log(error);
+    res.send(error)
+}
+else {
+    console.log('Email sent' + info.response)
+    res.send("envio exitoso")
+    }        
+})
+
+});
+ 
+
+ var transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    post: 587,
+    secure: false, 
+    auth:
+    {
+        user: 'yasmeen.paucek58@ethereal.email',
+        pass: 'BBypXcHJBx7dzV68Pj'
+    }
+});
