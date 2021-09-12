@@ -87,13 +87,13 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
     
 
 
-     // listar un articulos/////////////////////////////////////////
+     // listar un articulos PUG////////////////////////////////////////
     router.get('/ListarARticulos', async(request, response) =>{
       try{
         const articulosDB = await db.query ('select nombre from articulos');
         const articulos = articulosDB.rows               
               console.log (articulos)
-              // res.render('index', articulos.rows)
+              // res.render('index', {articulos: articulos})  //res.render('index',{nombres}); o {'nombres':nombres}
               return response.send ({
                 success: true,
                 articulos                
@@ -105,10 +105,35 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
         success: false,
         error:'exception: ' + JSON.stringify(ex)
       })
-    }  
-    
+    }      
+    }); //fin listar articulos PUG///////////////////////////////////
+     //////////////////////////////////////////////////////////////
+
+
+     // listar un articulos PUB/////////////////////////////////////////
+     router.get('/ListarARticulos', async(request, response) =>{
+      try{
+        const articulosDB = await db.query ('select nombre from articulos');
+        const articulos = articulosDB.rows               
+              console.log (articulos)
+              // res.render('index', {articulos: articulos})  //res.render('index',{nombres}); o {'nombres':nombres}
+              return response.send ({
+                success: true,
+                articulos                
+              })
+            }
+      
+      catch (ex){
+      return response.send ({
+        success: false,
+        error:'exception: ' + JSON.stringify(ex)
+      })
+    }      
     }); //fin listar articulos///////////////////////////////////
      //////////////////////////////////////////////////////////////
+
+
+
 
 
     
