@@ -107,7 +107,7 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
       })
     }  
     
-    }); //fin borrar un articulos///////////////////////////////////
+    }); //fin listar articulos///////////////////////////////////
      //////////////////////////////////////////////////////////////
 
 
@@ -141,27 +141,27 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
 
 
     
-    const articulos = [ 
-      {
-          id: "001",
-      nombre: "calefon",
-      descripcion: "calefon 10li",
-      categoria: "electrodomisticos",
-      imagen: "yyy",
-      precio: "15000",
-      estado: "ingresado"
-      },
-      {
-          id: "002",
-      nombre: "linerna",
-      descripcion: "linterna luz",
-      categoria: "iluminacion",
-      imagen: "xxx",
-      precio: "1200",
-      estado: "ingresado"
-      }                           
+    // const articulos = [ 
+    //   {
+    //       id: "001",
+    //   nombre: "calefon",
+    //   descripcion: "calefon 10li",
+    //   categoria: "electrodomisticos",
+    //   imagen: "yyy",
+    //   precio: "15000",
+    //   estado: "ingresado"
+    //   },
+    //   {
+    //       id: "002",
+    //   nombre: "linerna",
+    //   descripcion: "linterna luz",
+    //   categoria: "iluminacion",
+    //   imagen: "xxx",
+    //   precio: "1200",
+    //   estado: "ingresado"
+    //   }                           
      
-  ];//array de articulos
+  //];//array de articulos
     
     
     
