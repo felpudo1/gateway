@@ -68,32 +68,33 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
           estado:estado,
           id_proveedorEnArticulos: id_proveedorEnArticulos,
           id_categoriaEnArticulos: id_categoriaEnArticulos
-        }
-                
-    });
-    debugger
-    
+        }       
+    }); 
     }    
     catch (ex){  
       return response.send ({
         success:false,
         error: 'an exception was throw:' + (ex)        
         });    
-      }
-      
+      }      
     }); //FIN agregar un articulo///////////////////////////////////
      ////////////////////////////////////////////////////////////// 
     
+
+
+
      // listar un articulos/////////////////////////////////////////
     router.get('/ListarARticulos', async(request, response) =>{
       try{
-        const listadoArticulos = await db.query ('select nombre from articulos');
-        return response.send ({
-          listadoArticulos: [],
-          success:true,
-        });    
-
-      } 
+        const articulosDB = await db.query ('select * from articulos');
+        const articulos = articulosDB.rows               
+              console.log (articulos)
+              return response.send ({
+                success: true,
+                articulos
+              })
+            }
+      
       catch (ex){
       return response.send ({
         success: false,
