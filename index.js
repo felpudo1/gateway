@@ -10,12 +10,6 @@
     require ('dotenv').config();
 
 
-
-
-
-       
-
-
     //aca traemos el router qe creamos en ./routes/auth.js
     const app = express();
     const PORT = process.env.PORT ||3001;    
