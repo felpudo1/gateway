@@ -90,7 +90,7 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
      // listar un articulos/////////////////////////////////////////
     router.get('/ListarARticulos', async(request, response) =>{
       try{
-        const articulosDB = await db.query ('select * from articulos');
+        const articulosDB = await db.query ('select nombre from articulos');
         const articulos = articulosDB.rows               
               console.log (articulos)
               // res.render('index', articulos.rows)
