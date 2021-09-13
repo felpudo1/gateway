@@ -134,10 +134,6 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
     }); //fin listar articulos///////////////////////////////////
      //////////////////////////////////////////////////////////////
 
-
-
-
-
     
     //borrar un articulos/////////////////////////////////////////
     router.delete('/:articuloId', (request, response) =>{

@@ -2,7 +2,14 @@ html
     head    
         title = #{titulo}
     body
-         div #{articulos}
+        //-  div #{articulos}   
+       
+      each item in articulos
+        ul
+          li= item.nombre
+          
+
+
          
 
     
