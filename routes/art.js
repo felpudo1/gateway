@@ -90,7 +90,7 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
      // listar un articulos PUG////////////////////////////////////////
     router.get('/ListarARticulos', async(request, response) =>{
       try{
-        const articulosDB = await db.query ('select nombre from articulos');
+        const articulosDB = await db.query ('select nombre from articulos where estado = true');
         const articulos = articulosDB.rows               
               console.log (articulos)
               // res.render('index', {articulos: articulos})  //res.render('index',{nombres}); o {'nombres':nombres}
@@ -135,17 +135,34 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
      //////////////////////////////////////////////////////////////
 
     
+
+
+
     //borrar un articulos/////////////////////////////////////////
-    router.delete('/:articuloId', (request, response) =>{
-      response.send ({
-        deletedArticulo: {
-          name: 'ruta en construccion borrar art, id: ${request.param.articuloId}'
-        }
-      });
+    router.delete('/:articuloId',async(request, response) =>{
+      try{
+        const deleteArt = await db.query ('update articulos set estado = false where id_articulo = $1',[articuloId]);
+       
+              return response.send ({
+                success: true,
+                articulos                
+              })
+            }
+      
+      catch (ex){
+      return response.send ({
+        success: false,
+        error:'exception: ' + JSON.stringify(ex)
+       
+      })
+    } 
     
     }); //fin borrar un articulos///////////////////////////////////
      //////////////////////////////////////////////////////////////
     
+
+
+
     //actualiza un articulo/////////////////////////////////////////
     router.put('/:articuloId', (request, response) =>{
       response.send ({
