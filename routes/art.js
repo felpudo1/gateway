@@ -139,13 +139,16 @@ router.post('/agregararticulo', uploadMiddleware.single('imagen'), async (reques
 
 
     //borrar un articulos/////////////////////////////////////////
-    router.delete('/:articuloId',async(request, response) =>{
+    router.delete('/:id_articulo',async(request, response) =>{
+     
       try{
-        const deleteArt = await db.query ('update articulos set estado = false where id_articulo = $1',[articuloId]);
+        const id_articulo = request.params.id_articulo;
+        
+         const deleteArt = await db.query ('update articulos set estado = false where id_articulo =  $1', [id_articulo]);
        
               return response.send ({
                 success: true,
-                articulos                
+                // articulos                
               })
             }
       
