@@ -1,0 +1,109 @@
+Microservicio A
+
+El cliente desea que un servicios x
+
+en donde contenga un 
+
+titulo          string
+subtitulo       string
+contenido       string
+
+registerUser    uuid
+updateUser      uuid
+
+Microservicio B 
+El cliente desea un servicios x
+
+donde contenga un 
+
+status          bolean
+src             string
+
+registerUser    uuid
+updateUser      uuid
+
+Microservicio C
+El cliente desea un servicios x
+
+donde contenga un
+
+channel         uuid
+message         string
+
+status          string
+
+userAffected    uuid
+
+registerUser    uuid
+updateUser      uuid
+
+Microservicio D
+El cliente desea un servicios x
+
+donde contenga un 
+
+name            string
+level           options [high, medium, low]
+limit           number
+plugin          uuid
+
+Microservicio E
+El cliente desea un servicios x
+
+donde contenga un
+
+biometric       string
+id_user         number
+user            uuid
+whitelist       bolean
+
+Microservicio F
+El cliente desea un servicios x
+
+donde pueda validar fechas segun este objecto
+
+{
+    mon: [
+        { start: "", end: "" },
+        { start: "", end: "" },
+        { start: "", end: "" },
+    ],
+    .... asi por el resto de días de la semana
+}
+
+Respetando la regla de 
+start > x < end true
+todo lo demas false
+
+Microservicio G
+El cliente desea un servicios x
+
+donde pueda almacenar historial de x elementos
+
+donde contenga 
+
+element         uuid
+date            string
+
+Microservicio H
+
+El cliente desea que con el Microservicio G
+compruebe su existencia al escuchar una notificacion
+de "elemento eliminado"
+
+en caso que ya no exista dicho elemento se elimine
+del Microservicio G
+
+
+Microservicio J
+El cliente desea que con el Microservicio A
+compruebe su existencia al escuchar una notificacion
+de "nuevo elemento"
+
+notifique a los usuarios conectados
+del Microservicio G
+
+Microservicio X 
+El cliente desea obtener una lista de clientes en linea que 
+se encuentren un una determinada página del front para analizar así 
+el contenido de mayor interés 
